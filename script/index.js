@@ -3,8 +3,8 @@ function start() {
     let nameStore = document.getElementById("firstName").value;
     let noOfQuestions = document.getElementById("number").value;
     sessionStorage.setItem("playerName", nameStore);
-  sessionStorage.setItem("noOfQuestion", noOfQuestions);
-  
+    sessionStorage.setItem("noOfQuestion", noOfQuestions);
+    
     const name = document.getElementById("firstName");
   
     if (name.value == "") {
