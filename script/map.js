@@ -36,8 +36,8 @@ let currentQuestionNo;
 let score=0;
 let timerId;
  //fetching data from session Storage
-const playerName=sessionStorage.getItem('playerName');
-const noOfQuestion = sessionStorage.getItem('noOfQuestion');
+const playerName="vighnesh";
+const noOfQuestion = 5;
 
 
 //====================================================================
@@ -60,7 +60,7 @@ window.onload=function(){
 
 function generateQuestion(){
       //function which generates questions
-      
+    disableButton()
     removeTimeoutMessage()
     clearInterval(timerId); //clear the existing timer
     stopTimer() //stop the timer
@@ -106,7 +106,7 @@ function displayCurrentResult(clickId){
 
 function clickReciever(clickedElementId){
     //recieve and process the click on the map
-    
+    enableButton() //next button enabled
     clearInterval(timerId);//stop the timer
     stopTimer()
     disableAnswering()
@@ -141,6 +141,26 @@ function removeTimeoutMessage(){
     document.getElementById('timeout-message').style.display = 'none';
 }  
 
+function enableButton(){
+
+    let button=document.getElementById("next-button")
+    button.classList.remove("btn-primary");
+    button.classList.add("btn-danger");
+    button.style.opacity=1
+    
+    button.onclick=generateQuestion
+}
+
+function disableButton(){
+
+    let button=document.getElementById("next-button")
+    
+    button.classList.remove("btn-danger");
+    button.classList.add("btn-primary");
+    button.style.opacity=0.75
+    button.onclick=""
+}
+
 //general utitlity function 
 //function to get elements from map using index
 function getElementFromIndex(index,map){
@@ -164,6 +184,7 @@ function startTimer() {
     
         if (--timer < 0) {
             displayTimeoutMessage()
+            enableButton()
             stopTimer()
             clearInterval(timerId);
         

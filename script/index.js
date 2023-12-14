@@ -1,17 +1,26 @@
 function start() {
-    event.preventDefault();
-    let nameStore = document.getElementById("firstName").value;
-    let noOfQuestions = document.getElementById("number").value;
+
+
+  let nameStore = document.getElementById("firstName").value;
+  let noOfQuestions = document.getElementById("number").value;
+
+
+  if (nameStore == "") {
+    window.alert("Type first name");
+    return;
+  } else {
+    //this code needs fixing link is not reached
+    window.location.replace("./game.html");
+    console.log("reached")
+  }
+    
+    
     sessionStorage.setItem("playerName", nameStore);
   sessionStorage.setItem("noOfQuestion", noOfQuestions);
   
-    const name = document.getElementById("firstName");
+   
   
-    if (name.value == "") {
-      window.alert("Type first name");
-    } else {
-      window.location.href = "game.html";
-    }
+  
   }
   
   // window.onload = function(){
