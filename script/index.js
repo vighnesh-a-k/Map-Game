@@ -2,8 +2,8 @@ function start() {
     event.preventDefault();
     let nameStore = document.getElementById("firstName").value;
     let noOfQuestions = document.getElementById("number").value;
-    sessionStorage.setItem("username", nameStore);
-    sessionStorage.setItem("questions", noOfQuestions);
+    sessionStorage.setItem("playerName", nameStore);
+  sessionStorage.setItem("noOfQuestion", noOfQuestions);
   
     const name = document.getElementById("firstName");
   
@@ -14,6 +14,6 @@ function start() {
     }
   }
   
-  window.onload = function(){
-      document.getElementById("intro-music").play();
-  }
+  // window.onload = function(){
+  //     document.getElementById("intro-music").play();
+  // }
