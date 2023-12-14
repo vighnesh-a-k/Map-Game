@@ -38,6 +38,8 @@ let currentQuestionNo;
 const playerName=sessionStorage.getItem('playerName');
 const noOfQuestion = sessionStorage.getItem('noOfQuestion');
 
+//variable to store score
+let score = 0;
 
 //====================================================================
 
@@ -46,7 +48,6 @@ window.onload=function(){
     while(questionNoList.size<noOfQuestion){
         let randomValue=Math.floor(Math.random()*10+1);
         questionNoList.add(randomValue);
-
     }
     questionNoList=[...questionNoList]
     generateQuestion();
@@ -54,12 +55,13 @@ window.onload=function(){
 }
 
 //====================================================================
+//Functions which provide questions and functionality to buttons
 
 function generateQuestion(){
       //function which generates questions
 
       if(questionNoList.length<=0){
-        console.log("empty error")
+        finalDisplayCalculate(score,noOfQuestion);
         return;
     }
     currentQuestionNo=questionNoList.pop()
@@ -78,10 +80,16 @@ function displayCurrentResult(clickId){
     let resultDisplayElement=document.getElementById("result-text")
     if(answers[currentQuestionNo]==clickId){
         resultDisplayElement.innerText="Correct"
+        updateScore();
     }
     else{
         resultDisplayElement.innerText="Wrong"
     }
+}
+
+//function to update score based on questions
+function updateScore(){
+    score++;
 }
 
 function clickReciever(clickedElementId){
