@@ -36,10 +36,11 @@ let currentQuestionNo;
 let score=0;
 let timerId;
  //fetching data from session Storage
-const playerName="vighnesh";
-const noOfQuestion=8
+const playerName=sessionStorage.getItem('playerName');
+const noOfQuestion = sessionStorage.getItem('noOfQuestion');
 
 
+//====================================================================
 
 window.onload=function(){
     //random question number generation
@@ -55,7 +56,7 @@ window.onload=function(){
     displayQuestion()
 }
 
-
+//====================================================================
 
 function generateQuestion(){
       //function which generates questions
@@ -222,7 +223,7 @@ function storehighscore() {
 //function to select what to display on the final screen
 const finalDisplayCalculate = (score, numberOfqs) => {
   
-    score = (parseInt(score) / parseInt(numberOfqs)) * 100;
+    score = (Math.round(((parseInt(score) / parseInt(numberOfqs)) * 100) * 100) / 100).toFixed(2);
     let finalSentence;
     let highscorename = null;
     let highscorenumber;
@@ -301,7 +302,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
     const cuRecDiv = document.createElement('div');
     cuRecDiv.id = "cRecScore-div";
-    cuRecDiv.innerText = "Current Record : " + highscorenumber;
+    cuRecDiv.innerText = "Current Record : " + highscorenumber+"%";
 
     const cuRecNameDiv = document.createElement('div');
     cuRecNameDiv.id = "cRecName-div";
@@ -318,7 +319,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
     const yourScore = document.createElement('div');
     yourScore.id = "yourScore-div";
-    yourScore.innerText = "Your Score : " + score;
+    yourScore.innerText = "Your Score : " + score+"%";
 
     resultCard.appendChild(yourScore);
 

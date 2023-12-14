@@ -1,23 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
 body {
-    background-color: #f4f4f4;
+  background-image: url("../assets/921j\ \(1\).gif");
+  background-size: contain;
   }
   
   .card {
     max-width: 600px;
     margin: auto;
+    opacity: 0.8;
   }
   
   .card-header {
     background-color: #007bff;
-    color: #ffffff;
+    color: #e97508;
     font-size: 24px;
     font-weight: bold;
+    font-family: 'Silkscreen', sans-serif;
+  }
+
+  .card-body{
+    text-align: center;
+    background-color: #dfdede13;
+    
+
+  }
+
+  .card-body h5{
+    font-family: 'Silkscreen', sans-serif;
+    text-align: center;
+    color: #FF0000;
+    background-color: aqua;
+  }
+
+  .card-body ul li{
+    font-family: 'Silkscreen', sans-serif;
+    color: #0000FF;
+    border: solid;
+    text-align: left;
+    text-shadow:3px 3px white;
   }
   
   .card-title {
     font-size: 20px;
     font-weight: bold;
-    color: #333333;
+    color: #FF0000;
   }
   
   .list-group-item {
@@ -33,6 +63,7 @@ body {
     font-size: 18px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    font-family: 'Silkscreen', sans-serif;
   }
   
   .btn-primary:hover {
@@ -45,6 +76,19 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    /* background-color:#5aabf7; */
+    text-align: left;
+    border: none;
+  }
+  
+  label{
+    font-family: 'Silkscreen', sans-serif;
+    color: #0000FF;
+  }
+
+  input{
+    font-family: 'Silkscreen', sans-serif;
+    color: #0000FF;
   }
 
   /* Style for the select tag */
@@ -60,4 +104,19 @@ body {
     width: 150px; /* Adjust the width as needed */
     text-align: right;
     margin-right: 15px; /* Add spacing between label and input/select */
-}
+  }
+
+  .start-button{
+    margin-left: 80px;
+  }
+
+  #firstName{
+    border-radius: 30px;
+    border: solid 5px red;
+    padding: 7px;
+  }
+  #number{
+    border-radius: 30px;
+    border: solid 5px red;
+  }
+
