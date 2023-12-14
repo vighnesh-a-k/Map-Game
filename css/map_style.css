@@ -41,4 +41,43 @@ body {
     height: auto;
     max-width: 100%;
   }
-  
+
+.game-over{
+  color: red;
+  font-family: monospace;
+  font-weight: 800;
+  text-decoration: wavy;
+  text-shadow: 2px 2px black;
+  padding: 7px;
+  background-color: rgb(252, 252, 173);
+}
+#cRecScore-div{
+  color:purple;
+  font-size: larger;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+}
+
+#cRecName-div {
+  color: purple;
+  font-size: larger;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+}
+
+#yourScore-div{
+  color: rgb(73, 1, 1);
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    padding: 10px;
+}
+
+#sentence-div{
+    color: rgb(29, 0, 61);
+      font-size: xx-large;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      padding: 10px;
+}
+
