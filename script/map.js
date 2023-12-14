@@ -19,3 +19,21 @@ window.onload=function(){
     // console.log(questionNoSet);
 
 }
+
+//display gif for highscore
+function gifDisplayHighscore()
+{
+    setTimeout(function(){
+        document.getElementById("highscore-gif").style='visibility:hidden';
+    },5000);
+    document.getElementById("highscore-gif").style='visibility:visible';
+}
+
+//diplay gif for low score
+function gifDisplayLowscore()
+{
+    setTimeout(function(){
+        document.getElementById("lowscore-gif").style='visibility:hidden';
+    },5000);
+    document.getElementById("lowscore-image").style='visibility:visible';
+}

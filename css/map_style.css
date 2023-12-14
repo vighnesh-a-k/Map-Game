@@ -41,4 +41,21 @@ body {
     height: auto;
     max-width: 100%;
   }
+
+
+  #highscore-gif{
+    visibility:hidden;
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+}
+
+#lowscore-gif{
+        visibility:hidden;
+        position: absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+}
   
