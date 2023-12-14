@@ -33,12 +33,15 @@ let answers = new Map([
 //defining the set for question numbers
 let  questionNoList=new Set();
 let currentQuestionNo;
-let score=0;
+
+//varibale to store the id returned by the setinterval function
 let timerId;
  //fetching data from session Storage
-const playerName="vighnesh";
-const noOfQuestion = 5;
+const playerName=sessionStorage.getItem('playerName');
+const noOfQuestion = sessionStorage.getItem('noOfQuestion');
 
+//variable to store score
+let score = 0;
 
 //====================================================================
 
@@ -47,7 +50,6 @@ window.onload=function(){
     while(questionNoList.size<noOfQuestion){
         let randomValue=Math.floor(Math.random()*10);
         questionNoList.add(randomValue);
-
     }
     console.log(questionNoList)
     questionNoList=[...questionNoList]
@@ -57,6 +59,7 @@ window.onload=function(){
 }
 
 //====================================================================
+//Functions which provide questions and functionality to buttons
 
 function generateQuestion(){
       //function which generates questions
@@ -96,12 +99,17 @@ function displayCurrentResult(clickId){
 
     if(answer==clickId){
         resultDisplayElement.innerText="Correct"
-        score+=1
+        updateScore();
     }
     else{
         resultDisplayElement.innerText="Wrong"
     }
     resultDisplayElement.style.display="block"
+}
+
+//function to update score based on questions
+function updateScore(){
+    score++;
 }
 
 function clickReciever(clickedElementId){
