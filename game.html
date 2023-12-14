@@ -12,8 +12,8 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card text-center">
-                    <div class="card-body">
+                <div class="card text-center"  id="main-card">
+                    <div class="card-body"  id="card-inner">
                         <h2 class="card-title mb-4" id="question-text">Which is the largest continent?</h2>
                         <p class="card-text text-success mb-4"><strong>Correct!</strong></p>
                         <div class="map-container mb-3">
@@ -42,7 +42,8 @@
                                     shape="poly">
                             </map>
                         </div>
-                        <a href="#" class="btn btn-primary button-div">Next Question</a>
+                        
+                        <a onclick=" finalDisplayCalculate(2,5);" class="btn btn-primary button-div">Next Question</a>
                     </div>
                 </div>
             </div>
