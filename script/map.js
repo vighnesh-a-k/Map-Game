@@ -1,3 +1,5 @@
+//============declarations=======================
+
 //Questions
 let questions = new Map([
     [1, "Which continent is India part of?"],
@@ -25,9 +27,11 @@ let answers = new Map([
     [10, "South America"]
 ])  
 
-
-
 var questionNoSet=new Set();
+
+
+//===================functions======================
+
 
 window.onload=function(){
 
@@ -44,7 +48,7 @@ window.onload=function(){
         questionNoSet.add(randomValue);
 
     }
-
+  
     //console.log(questionNoSet);
     generateQuestion();
 }
@@ -59,11 +63,39 @@ function generateQuestion(){
 }
 
 
-let playerName = 'josin';
+//==============================================================================
+
+//display gif for highscore
+
+function gifDisplayHighscore()
+{
+    setTimeout(function(){
+        document.getElementById("highscore-gif").style='visibility:hidden';
+    },5000);
+    document.getElementById("highscore-gif").style='visibility:visible';
+}
+
+//diplay gif for low score
+
+function gifDisplayLowscore()
+{
+    setTimeout(function(){
+        document.getElementById("lowscore-gif").style='visibility:hidden';
+    },5000);
+    document.getElementById("lowscore-image").style='visibility:visible';
+}
+
+//==============================================================================
+
+
+//let playerName = 'josin';------------- created to test result display
+
+//=============================================================================
+
+// function to test calculation and display final result function independently
+//not used for functioning of the program
 
 function storehighscore() {
-
-    // function to test calculation and display final result function independently
     
     let highscorename = 'name';
     let highscorenumber = 50;
@@ -72,11 +104,12 @@ function storehighscore() {
 
 }
 
+//========================================================================
 
+
+//function to select what to display on the final screen
 const finalDisplayCalculate = (score, numberOfqs) => {
-
-    //function to select what to display on the final screen
-
+  
     score = (parseInt(score) / parseInt(numberOfqs)) * 100;
     let finalSentence;
     let highscorename = null;
@@ -84,12 +117,10 @@ const finalDisplayCalculate = (score, numberOfqs) => {
     document.getElementById('card-inner').remove();
 
     if (localStorage.getItem("highscorename") !== null) {
-
         highscorenumber = localStorage.getItem('highscorenumber');
-
         highscorename = localStorage.getItem('highscorename');
 
-        console.count("hn :" + highscorenumber + " " + highscorename + " ys: " + score);
+//console.count("hn :" + highscorenumber + " " + highscorename + " ys: " + score);
 
         if (score == 100) {
             if (score > highscorenumber) {
@@ -138,9 +169,13 @@ const finalDisplayCalculate = (score, numberOfqs) => {
 
 }
 
+//==================================================================================
+
+
+//function to display the final screen - game over
+
 const displayResult = (score, highscorename, highscorenumber, finalSentence) => {
 
-    //function to display the final screen - game over
     
     const resultCard = document.createElement('div');
     resultCard.classList.add("card-body");
@@ -208,4 +243,4 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 }
 
 
-
+//===========================================================
