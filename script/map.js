@@ -34,6 +34,8 @@ let answers = new Map([
 let  questionNoList=new Set();
 let currentQuestionNo;
 
+//varibale to store the id returned by the setinterval function
+let timerId;
  //fetching data from session Storage
 const playerName=sessionStorage.getItem('playerName');
 const noOfQuestion = sessionStorage.getItem('noOfQuestion');
@@ -46,10 +48,12 @@ let score = 0;
 window.onload=function(){
     //random question number generation
     while(questionNoList.size<noOfQuestion){
-        let randomValue=Math.floor(Math.random()*10+1);
+        let randomValue=Math.floor(Math.random()*10);
         questionNoList.add(randomValue);
     }
+    console.log(questionNoList)
     questionNoList=[...questionNoList]
+    console.log(questionNoList)
     generateQuestion();
     displayQuestion()
 }
@@ -59,32 +63,48 @@ window.onload=function(){
 
 function generateQuestion(){
       //function which generates questions
-
-      if(questionNoList.length<=0){
-        finalDisplayCalculate(score,noOfQuestion);
+    disableButton()
+    removeTimeoutMessage()
+    clearInterval(timerId); //clear the existing timer
+    stopTimer() //stop the timer
+    startTimer()
+    if(questionNoList.length<=0){
+        
+        finalDisplayCalculate(score,noOfQuestion)
         return;
     }
     currentQuestionNo=questionNoList.pop()
+    console.log(currentQuestionNo)
+    console.log(getElementFromIndex(currentQuestionNo,questions))
     enableAnswering()
     displayQuestion()
 }
 
 function displayQuestion(){
-        let questionDisplayElement=document.getElementById("question-text")
+
         let resultDisplayElement=document.getElementById("result-text")
-        questionDisplayElement.innerText=questions[currentQuestionNo]
+        let questionDisplayElement=document.getElementById("question-text")
+
+
+        resultDisplayElement.style.display="none"
+        questionDisplayElement.innerText=getElementFromIndex(currentQuestionNo,questions)
+
 }
 
 function displayCurrentResult(clickId){
     //display the result of current question
     let resultDisplayElement=document.getElementById("result-text")
-    if(answers[currentQuestionNo]==clickId){
+   
+    let answer=getElementFromIndex(currentQuestionNo,answers)
+
+    if(answer==clickId){
         resultDisplayElement.innerText="Correct"
         updateScore();
     }
     else{
         resultDisplayElement.innerText="Wrong"
     }
+    resultDisplayElement.style.display="block"
 }
 
 //function to update score based on questions
@@ -94,13 +114,16 @@ function updateScore(){
 
 function clickReciever(clickedElementId){
     //recieve and process the click on the map
+    enableButton() //next button enabled
+    clearInterval(timerId);//stop the timer
+    stopTimer()
     disableAnswering()
     displayCurrentResult(clickedElementId)
 }
 
 function enableAnswering(){
     //eneble the clicking  the map
-    areaContainer=document.getElementsByTagName("Area")
+    areaContainer=document.querySelectorAll('area');
     areaContainer.forEach((question) => {
         question.onclick = function() {
             clickReciever(this.id);
@@ -110,12 +133,76 @@ function enableAnswering(){
 
 function disableAnswering(){
     //disable clicking the map
-    areaContainer=document.getElementsByTagName("Area")
+    areaContainer=document.querySelectorAll('area');
     areaContainer.forEach((question) => {
         question.onclick =null
     });
 }
 
+function displayTimeoutMessage() {
+    document.getElementById('timeout-message').style.display = 'block';
+    disableAnswering()
+  }
+
+function removeTimeoutMessage(){
+
+    document.getElementById('timeout-message').style.display = 'none';
+}  
+
+function enableButton(){
+
+    let button=document.getElementById("next-button")
+    button.classList.remove("btn-primary");
+    button.classList.add("btn-danger");
+    button.style.opacity=1
+    
+    button.onclick=generateQuestion
+}
+
+function disableButton(){
+
+    let button=document.getElementById("next-button")
+    
+    button.classList.remove("btn-danger");
+    button.classList.add("btn-primary");
+    button.style.opacity=0.75
+    button.onclick=""
+}
+
+//general utitlity function 
+//function to get elements from map using index
+function getElementFromIndex(index,map){
+
+    let keys =Array.from(map.keys()); 
+    let indexKey=keys[index]
+    
+    console.log(questions.get(indexKey))
+
+    return map.get(indexKey)
+}
+
+function startTimer() {
+    let timer = 10;
+    let displayElement=document.getElementById("timer")
+    document.getElementById("timer-display").style.display="block"
+  
+    // Use setInterval to update the timer display every second
+    timerId = setInterval(function () {
+        displayElement.textContent = timer;
+    
+        if (--timer < 0) {
+            displayTimeoutMessage()
+            enableButton()
+            stopTimer()
+            clearInterval(timerId);
+        
+        }
+    }, 1000);
+  }
+function stopTimer(){
+    document.getElementById("timer-display").style.display="none"
+
+}
 
 
 //==============================================================================
