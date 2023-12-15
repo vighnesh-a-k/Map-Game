@@ -253,6 +253,9 @@ function storehighscore() {
 //function to select what to display on the final screen
 const finalDisplayCalculate = (score, numberOfqs) => {
   
+
+    let bgaudio=document.getElementById('bg-audio');
+    bgaudio.pause();
     score = (Math.round(((parseInt(score) / parseInt(numberOfqs)) * 100) * 100) / 100).toFixed(2);
     let finalSentence;
     let highscorename = null;
