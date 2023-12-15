@@ -269,7 +269,6 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         if (score == 100) {
             if (score > highscorenumber) {
                 finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record!";
-                gifDisplayHighscore();
 
 
                 let audio = new Audio("assets/music/success.wav");
@@ -278,6 +277,9 @@ const finalDisplayCalculate = (score, numberOfqs) => {
 
                 localStorage.setItem('highscorename', playerName);
                 localStorage.setItem('highscorenumber', score);
+                
+                gifDisplayHighscore();
+
 
             }
             else {
@@ -316,6 +318,9 @@ const finalDisplayCalculate = (score, numberOfqs) => {
             let audio = new Audio("assets/music/fail.mp3");
             audio.loop = false;
             playAudio(audio);
+
+            gifDisplayLowscore();//lowscore
+
         }
         else if (highscorenumber == score) {
             finalSentence = "Nice work " + playerName + ". You scored same as the current Record!";
