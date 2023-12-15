@@ -55,7 +55,7 @@ window.onload=function(){
     questionNoList=[...questionNoList]
     console.log(questionNoList)
     generateQuestion();
-    displayQuestion()
+    //displayQuestion()
 }
 
 //====================================================================
