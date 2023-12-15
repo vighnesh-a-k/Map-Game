@@ -274,7 +274,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
                 gifDisplayHighscore();
 
 
-                let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+                let audio = new Audio("assets/music/success.wav");
                 audio.loop = false;
                 playAudio(audio);
 
@@ -284,7 +284,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
             }
             else {
                 finalSentence = "Wow " + playerName + "! You scored 100%!";
-                let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+                let audio = new Audio("assets/music/success.wav");
                 audio.loop = false;
                 playAudio(audio);
 
@@ -303,7 +303,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         else if (highscorenumber < score) {
             finalSentence = "Wow " + playerName + "! You set a new Record!";
 
-            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            let audio = new Audio("assets/music/success.wav");
             audio.loop = false;
             playAudio(audio);
 
@@ -322,7 +322,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         else if (highscorenumber == score) {
             finalSentence = "Nice work " + playerName + ". You scored same as the current Record!";
 
-            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            let audio = new Audio("assets/music/success.wav");
             audio.loop = false;
             playAudio(audio);
 
@@ -335,7 +335,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         if (score == 100) {
             finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record as the first player!";
 
-            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            let audio = new Audio("assets/music/success.wav");
             audio.loop = false;
             playAudio(audio);
 
@@ -350,13 +350,13 @@ const finalDisplayCalculate = (score, numberOfqs) => {
             audio.loop = false;
             playAudio(audio);
 
-            
+
             gifDisplayLowscore();//lowscore
         }
         else {
             finalSentence = playerName + ", you actually set a new Record as the first player!";
 
-            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            let audio = new Audio("assets/music/success.wav");
             audio.loop = false;
             playAudio(audio);
 
