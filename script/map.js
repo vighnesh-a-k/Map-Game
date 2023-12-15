@@ -2,8 +2,6 @@
 
 //Questions
 
-
-
 let questions = new Map([
     [1, "Which continent is India part of?"],
     [2, "Which is the largest continent in area?"],
@@ -16,7 +14,10 @@ let questions = new Map([
     [9, "Columbus found which continent?"],
     [10, "Where is Amazon River?"]
 ]);
+
+
 //Answers to the questions
+
 let answers = new Map([
     [1, "Asia"],
     [2, "Asia"],
@@ -36,6 +37,7 @@ let currentQuestionNo;
 
 //varibale to store the id returned by the setinterval function
 let timerId;
+
  //fetching data from session Storage
 const playerName=sessionStorage.getItem('playerName');
 const noOfQuestion = sessionStorage.getItem('noOfQuestion');
@@ -51,37 +53,37 @@ window.onload=function(){
         let randomValue=Math.floor(Math.random()*10);
         questionNoList.add(randomValue);
     }
-    console.log(questionNoList)
-    questionNoList=[...questionNoList]
+    console.log(questionNoList);
+    questionNoList = [...questionNoList];
     console.log(questionNoList)
     generateQuestion();
-    displayQuestion()
+    // displayQuestion(); ---- already called inside generateQuestion()
 }
 
 //====================================================================
 //Functions which provide questions and functionality to buttons
 
-function generateQuestion(){    
-    //function which generates questions
+function generateQuestion(){
+      //function which generates questions
     disableButton();
     removeTimeoutMessage();
     clearInterval(timerId); //clear the existing timer
-    stopTimer(); //stop the timer
-    startTimer();
-    if(questionNoList.length<=0){
-        finalDisplayCalculate(score,noOfQuestion);
+    stopTimer();; //stop the timer
+    startTimer();;
+    if(questionNoList.length<=0){//if last question, go to result
+        finalDisplayCalculate(score, noOfQuestion);;
         return;
     }
-    currentQuestionNo=questionNoList.pop();
-    
+    currentQuestionNo = questionNoList.pop();
+
     enableAnswering();
     displayQuestion();
 }
 
 function displayQuestion(){
 
-        let resultDisplayElement=document.getElementById("result-text")
-        let questionDisplayElement=document.getElementById("question-text")
+    let resultDisplayElement = document.getElementById("result-text");
+    let questionDisplayElement = document.getElementById("question-text");
 
 
         resultDisplayElement.style.display="none"
@@ -91,21 +93,21 @@ function displayQuestion(){
 
 function displayCurrentResult(clickId){
     //display the result of current question
-    let resultDisplayElement=document.getElementById("result-text")
+    let resultDisplayElement = document.getElementById("result-text");
    
     let answer=answers.get(currentQuestionNo+1);
 
     if(answer==clickId){
-        resultDisplayElement.innerText = "Correct!"
-        resultDisplayElement.style = "color:green"
+        resultDisplayElement.innerText = "Correct!";
+        resultDisplayElement.style = "color:green";
 
         updateScore();
     }
     else{
-        resultDisplayElement.innerText = "Wrong!"
-        resultDisplayElement.style="color:red"
+        resultDisplayElement.innerText = "Wrong!";
+        resultDisplayElement.style = "color:red";
     }
-    resultDisplayElement.style.display="block"
+    resultDisplayElement.style.display = "block";
 }
 
 //function to update score based on questions
@@ -115,11 +117,11 @@ function updateScore(){
 
 function clickReciever(clickedElementId){
     //recieve and process the click on the map
-    enableButton() //next button enabled
+    enableButton();//next button enabled
     clearInterval(timerId);//stop the timer
-    stopTimer()
-    disableAnswering()
-    displayCurrentResult(clickedElementId)
+    stopTimer();
+    disableAnswering();
+    displayCurrentResult(clickedElementId);
 }
 
 function enableAnswering(){
@@ -136,13 +138,13 @@ function disableAnswering(){
     //disable clicking the map
     areaContainer=document.querySelectorAll('area');
     areaContainer.forEach((question) => {
-        question.onclick =null
+        question.onclick = null;
     });
 }
 
 function displayTimeoutMessage() {
     document.getElementById('timeout-message').style.display = 'block';
-    disableAnswering()
+    disableAnswering();
   }
 
 function removeTimeoutMessage(){
@@ -156,10 +158,10 @@ function enableButton(){
     button.disabled = false;
     button.classList.remove("btn-danger");
     button.classList.add("btn-primary");
-    button.style.opacity = 1
+    button.style.opacity = 1;
 
-    if (questionNoList.length <= 0) {
-        button.innerHTML = "  Submit  "
+    if (questionNoList.length <= 0) {//if last question, change the button text to submit
+        button.innerHTML = "  Submit  ";
     }
     
     button.onclick=generateQuestion
@@ -172,25 +174,25 @@ function disableButton(){
     
     button.classList.remove("btn-primary");
     button.classList.add("btn-danger");
-    button.style.opacity=0.75
-    button.onclick=""
+    button.style.opacity = 0.75;
+    button.onclick = "";
 }
 
 //general utitlity function 
 
 function startTimer() {
     let timer = 10;
-    let displayElement=document.getElementById("timer")
-    document.getElementById("timer-display").style.display="block"
+    let displayElement = document.getElementById("timer");
+    document.getElementById("timer-display").style.display = "block";
   
     // Use setInterval to update the timer display every second
     timerId = setInterval(function () {
         displayElement.textContent = timer;
     
         if (--timer < 0) {
-            displayTimeoutMessage()
-            enableButton()
-            stopTimer()
+            displayTimeoutMessage();
+            enableButton();
+            stopTimer();
             clearInterval(timerId);
         
         }
@@ -199,7 +201,7 @@ function startTimer() {
   }
   
 function stopTimer(){
-    document.getElementById("timer-display").style.display="none"
+    document.getElementById("timer-display").style.display = "none";
 
 }
 
@@ -223,7 +225,7 @@ function gifDisplayLowscore()
     setTimeout(function(){
         document.getElementById("lowscore-gif").style='visibility:hidden';
     },5000);
-    document.getElementById("lowscore-image").style='visibility:visible';
+    document.getElementById("lowscore-gif").style='visibility:visible';
 }
 
 //==============================================================================
@@ -251,6 +253,9 @@ function storehighscore() {
 //function to select what to display on the final screen
 const finalDisplayCalculate = (score, numberOfqs) => {
   
+
+    let bgaudio=document.getElementById('bg-audio');
+    bgaudio.pause();
     score = (Math.round(((parseInt(score) / parseInt(numberOfqs)) * 100) * 100) / 100).toFixed(2);
     let finalSentence;
     let highscorename = null;
@@ -266,19 +271,24 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         if (score == 100) {
             if (score > highscorenumber) {
                 finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record!";
+                gifDisplayHighscore();
                 localStorage.setItem('highscorename', playerName);
                 localStorage.setItem('highscorenumber', score);
 
             }
             else {
                 finalSentence = "Wow " + playerName + "! You scored 100%!";
+                gifDisplayHighscore();
             }
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ...";
+            gifDisplayLowscore();//lowscore
         }
         else if (highscorenumber < score) {
             finalSentence = "Wow " + playerName + "! You set a new Record!";
+            gifDisplayHighscore();
+
             localStorage.setItem('highscorename', playerName);
             localStorage.setItem('highscorenumber', score);
         }
@@ -287,18 +297,25 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         }
         else if (highscorenumber == score) {
             finalSentence = "Nice work " + playerName + ". You scored same as the current Record!";
+            gifDisplayHighscore();
+
         }
     }
     else {
         highscorenumber = 0;
         if (score == 100) {
             finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record as the first player!";
+            gifDisplayHighscore();
+
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ... and set a record of '0'... Booo";
+            gifDisplayLowscore();//lowscore
         }
         else {
             finalSentence = playerName + ", you actually set a new Record as the first player!";
+            gifDisplayHighscore();
+
 
         }
         localStorage.setItem('highscorename', playerName);
@@ -317,7 +334,8 @@ const finalDisplayCalculate = (score, numberOfqs) => {
 
 const displayResult = (score, highscorename, highscorenumber, finalSentence) => {
 
-    
+    //gifDisplayHighscore();//display gif for beating high score
+   
     const resultCard = document.createElement('div');
     resultCard.classList.add("card-body");
     resultCard.id = "card-inner";
@@ -385,3 +403,4 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
 
 //===========================================================
+
