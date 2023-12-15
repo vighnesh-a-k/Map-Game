@@ -180,9 +180,9 @@ function disableButton() {
 //general utitlity function 
 
 function startTimer() {
-    let timer = 10;
+    let timer = 9;
     let displayElement = document.getElementById("timer");
-
+    displayElement.textContent=10
     document.getElementById("timer-display").style.display = "block";
 
     // Use setInterval to update the timer display every second
