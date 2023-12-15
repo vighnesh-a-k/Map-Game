@@ -61,23 +61,21 @@ window.onload=function(){
 //====================================================================
 //Functions which provide questions and functionality to buttons
 
-function generateQuestion(){
-      //function which generates questions
-    disableButton()
-    removeTimeoutMessage()
+function generateQuestion(){    
+    //function which generates questions
+    disableButton();
+    removeTimeoutMessage();
     clearInterval(timerId); //clear the existing timer
-    stopTimer() //stop the timer
-    startTimer()
+    stopTimer(); //stop the timer
+    startTimer();
     if(questionNoList.length<=0){
-        
-        finalDisplayCalculate(score,noOfQuestion)
+        finalDisplayCalculate(score,noOfQuestion);
         return;
     }
-    currentQuestionNo=questionNoList.pop()
-    console.log(currentQuestionNo)
-    console.log(getElementFromIndex(currentQuestionNo,questions))
-    enableAnswering()
-    displayQuestion()
+    currentQuestionNo=questionNoList.pop();
+    
+    enableAnswering();
+    displayQuestion();
 }
 
 function displayQuestion(){
@@ -87,7 +85,7 @@ function displayQuestion(){
 
 
         resultDisplayElement.style.display="none"
-        questionDisplayElement.innerText=getElementFromIndex(currentQuestionNo,questions)
+        questionDisplayElement.innerText=questions.get(currentQuestionNo+1);
 
 }
 
@@ -95,7 +93,7 @@ function displayCurrentResult(clickId){
     //display the result of current question
     let resultDisplayElement=document.getElementById("result-text")
    
-    let answer=getElementFromIndex(currentQuestionNo,answers)
+    let answer=answers.get(currentQuestionNo+1);
 
     if(answer==clickId){
         resultDisplayElement.innerText = "Correct!"
@@ -179,16 +177,6 @@ function disableButton(){
 }
 
 //general utitlity function 
-//function to get elements from map using index
-function getElementFromIndex(index,map){
-
-    let keys =Array.from(map.keys()); 
-    let indexKey=keys[index]
-    
-    console.log(questions.get(indexKey))
-
-    return map.get(indexKey)
-}
 
 function startTimer() {
     let timer = 10;
@@ -207,7 +195,9 @@ function startTimer() {
         
         }
     }, 1000);
+    // console.log("console id:",timerId)
   }
+  
 function stopTimer(){
     document.getElementById("timer-display").style.display="none"
 
