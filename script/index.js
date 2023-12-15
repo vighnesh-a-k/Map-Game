@@ -14,7 +14,7 @@ function playAudio(audio) {
     if (nameStore == "") {
       window.alert("Type first name");
     } else {
-      let audio = new Audio("assets/start-13691.mp3");
+      let audio = new Audio("assets/music/start-13691.mp3");
       audio.loop = false;
       await playAudio(audio);
       window.location.assign("./game.html");
