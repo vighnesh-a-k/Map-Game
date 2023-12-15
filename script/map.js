@@ -98,11 +98,14 @@ function displayCurrentResult(clickId){
     let answer=getElementFromIndex(currentQuestionNo,answers)
 
     if(answer==clickId){
-        resultDisplayElement.innerText="Correct"
+        resultDisplayElement.innerText = "Correct!"
+        resultDisplayElement.style = "color:green"
+
         updateScore();
     }
     else{
-        resultDisplayElement.innerText="Wrong"
+        resultDisplayElement.innerText = "Wrong!"
+        resultDisplayElement.style="color:red"
     }
     resultDisplayElement.style.display="block"
 }
@@ -151,20 +154,26 @@ function removeTimeoutMessage(){
 
 function enableButton(){
 
-    let button=document.getElementById("next-button")
-    button.classList.remove("btn-primary");
-    button.classList.add("btn-danger");
-    button.style.opacity=1
+    let button = document.getElementById("next-button");
+    button.disabled = false;
+    button.classList.remove("btn-danger");
+    button.classList.add("btn-primary");
+    button.style.opacity = 1
+
+    if (questionNoList.length <= 0) {
+        button.innerHTML = "  Submit  "
+    }
     
     button.onclick=generateQuestion
 }
 
 function disableButton(){
 
-    let button=document.getElementById("next-button")
+    let button = document.getElementById("next-button");
+    button.disabled = true;
     
-    button.classList.remove("btn-danger");
-    button.classList.add("btn-primary");
+    button.classList.remove("btn-primary");
+    button.classList.add("btn-danger");
     button.style.opacity=0.75
     button.onclick=""
 }
@@ -259,7 +268,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
     document.getElementById('card-inner').remove();
 
     if (localStorage.getItem("highscorename") !== null) {
-        highscorenumber = localStorage.getItem('highscorenumber');
+        highscorenumber = parseInt(localStorage.getItem('highscorenumber'));
         highscorename = localStorage.getItem('highscorename');
 
 //console.count("hn :" + highscorenumber + " " + highscorename + " ys: " + score);
@@ -293,7 +302,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
     else {
         highscorenumber = 0;
         if (score == 100) {
-            finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record!";
+            finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record as the first player!";
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ... and set a record of '0'... Booo";
@@ -323,7 +332,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
     resultCard.classList.add("card-body");
     resultCard.id = "card-inner";
 
-    const gameOverText = document.createElement('h2');
+    const gameOverText = document.createElement('h1');
     gameOverText.classList.add("game-over", "mb-4");
     gameOverText.innerText = "GAME OVER!";
 
@@ -363,7 +372,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
     const replayButton = document.createElement('button');
     replayButton.id = "replay-button";
-    replayButton.classList.add("btn", "btn-success", "btn-lg");
+    replayButton.classList.add("btn", "btn-success", "btn-lg","m-5");
     replayButton.innerHTML = "Try again";
     replayButton.onclick = function () {
         window.location.href = "./index.html";

@@ -1,16 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
+
 body {
-    background-color: #f4f4f4;
-  }
-  
+  background-image: url("../assets/921j\ \(1\).gif");
+  background-size: contain;
+}
+
 .card {
   box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
   border: none;
   margin-top: 20px;
+  opacity: 0.9;
 }
 
 .card-title {
-  color:blueviolet !important;
+  color: blueviolet !important;
   font-size: 1.75rem;
+  font-family: 'Silkscreen', sans-serif;
+  text-shadow: 3px 3px white;
 }
 
 .card-text {
@@ -43,59 +53,97 @@ img[usemap] {
 }
 
 
-#highscore-gif{
-  visibility:hidden;
+#highscore-gif {
+  visibility: hidden;
   position: absolute;
-  top:0px;
-  left:0px;
-  width:100%;
+  top: 0px;
+  left: 0px;
+  width: 100%;
 }
 
-#lowscore-gif{
-        visibility:hidden;
-        position: absolute;
-        top:0px;
-        left:0px;
-        width:100%;
+#lowscore-gif {
+  visibility: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
 }
-  
 
-.game-over{
+
+.game-over {
   color: red;
-  font-family: monospace;
-  font-weight: 800;
+  font-family: 'Silkscreen', sans-serif;
+  font-weight: 600;
   text-decoration: wavy;
   text-shadow: 2px 2px black;
   padding: 7px;
   background-color: rgb(252, 252, 173);
 }
 
-#cRecScore-div{
-  color:purple;
+#cRecScore-div {
+  color: purple;
   font-size: larger;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 700;
+  font-family: 'Silkscreen', sans-serif;
+  font-weight: 500;
 }
 
 #cRecName-div {
   color: purple;
   font-size: larger;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 700;
+  font-family: 'Silkscreen', sans-serif;
+  font-weight: 500;
 }
 
-#yourScore-div{
+#yourScore-div {
   color: rgb(73, 1, 1);
-    font-size: x-large;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 700;
-    padding: 10px;
+  font-size: x-large;
+  font-family: 'Silkscreen', sans-serif;
+  font-weight: 500;
+  padding: 10px;
 }
 
-#sentence-div{
-    color: rgb(29, 0, 61);
-      font-size: xx-large;
-      font-family: 'Courier New', Courier, monospace;
-      font-weight: 700;
-      padding: 10px;
+#sentence-div {
+  color: rgb(29, 0, 61);
+  font-size: xx-large;
+  font-family: 'Silkscreen', sans-serif;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-family: 'Silkscreen', sans-serif !important;
+}
+
+.btn-success {
+  font-family: 'Silkscreen', sans-serif !important;
+}
+
+.btn-danger {
+  font-family: 'Silkscreen', sans-serif !important;
+}
+
+#timeout-message{
+    font-family: 'Silkscreen', sans-serif !important;
+    font-size: x-large !important;
+}
+
+#timer-display{
+    font-family: 'Silkscreen', sans-serif !important;
+    font-size: large !important;
+}
+
+#timer-display {
+  font-family: 'Silkscreen', sans-serif !important;
+  font-size: large !important;
+}
+
+#result-text{
+      font-family: 'Silkscreen', sans-serif !important;
+        font-size:xx-large !important;
 }
