@@ -272,21 +272,41 @@ const finalDisplayCalculate = (score, numberOfqs) => {
             if (score > highscorenumber) {
                 finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record!";
                 gifDisplayHighscore();
+
+
+                let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+                audio.loop = false;
+                playAudio(audio);
+
                 localStorage.setItem('highscorename', playerName);
                 localStorage.setItem('highscorenumber', score);
 
             }
             else {
                 finalSentence = "Wow " + playerName + "! You scored 100%!";
+                let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+                audio.loop = false;
+                playAudio(audio);
+
                 gifDisplayHighscore();
             }
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ...";
+
+            let audio = new Audio("assets/music/fail.mp3");
+            audio.loop = false;
+            playAudio(audio);
+
             gifDisplayLowscore();//lowscore
         }
         else if (highscorenumber < score) {
             finalSentence = "Wow " + playerName + "! You set a new Record!";
+
+            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            audio.loop = false;
+            playAudio(audio);
+
             gifDisplayHighscore();
 
             localStorage.setItem('highscorename', playerName);
@@ -294,9 +314,18 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         }
         else if (highscorenumber > score) {
             finalSentence = "We think you could do a little better " + playerName + ".";
+
+            let audio = new Audio("assets/music/fail.mp3");
+            audio.loop = false;
+            playAudio(audio);
         }
         else if (highscorenumber == score) {
             finalSentence = "Nice work " + playerName + ". You scored same as the current Record!";
+
+            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            audio.loop = false;
+            playAudio(audio);
+
             gifDisplayHighscore();
 
         }
@@ -305,15 +334,33 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         highscorenumber = 0;
         if (score == 100) {
             finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record as the first player!";
+
+            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            audio.loop = false;
+            playAudio(audio);
+
+
             gifDisplayHighscore();
 
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ... and set a record of '0'... Booo";
+
+            let audio = new Audio("assets/music/fail.mp3");
+            audio.loop = false;
+            playAudio(audio);
+
+            
             gifDisplayLowscore();//lowscore
         }
         else {
             finalSentence = playerName + ", you actually set a new Record as the first player!";
+
+            let audio = new Audio("assets/music/mixkit-final-level-bonus-2061.wav");
+            audio.loop = false;
+            playAudio(audio);
+
+
             gifDisplayHighscore();
 
 
@@ -403,4 +450,11 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
 
 //===========================================================
+
+
+//play audio
+
+async function playAudio(audio) {
+        audio.play();
+}
 
