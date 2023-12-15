@@ -225,7 +225,7 @@ function gifDisplayLowscore()
     setTimeout(function(){
         document.getElementById("lowscore-gif").style='visibility:hidden';
     },5000);
-    document.getElementById("lowscore-image").style='visibility:visible';
+    document.getElementById("lowscore-gif").style='visibility:visible';
 }
 
 //==============================================================================
@@ -253,6 +253,9 @@ function storehighscore() {
 //function to select what to display on the final screen
 const finalDisplayCalculate = (score, numberOfqs) => {
   
+
+    let bgaudio=document.getElementById('bg-audio');
+    bgaudio.pause();
     score = (Math.round(((parseInt(score) / parseInt(numberOfqs)) * 100) * 100) / 100).toFixed(2);
     let finalSentence;
     let highscorename = null;
@@ -268,19 +271,24 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         if (score == 100) {
             if (score > highscorenumber) {
                 finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record!";
+                gifDisplayHighscore();
                 localStorage.setItem('highscorename', playerName);
                 localStorage.setItem('highscorenumber', score);
 
             }
             else {
                 finalSentence = "Wow " + playerName + "! You scored 100%!";
+                gifDisplayHighscore();
             }
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ...";
+            gifDisplayLowscore();//lowscore
         }
         else if (highscorenumber < score) {
             finalSentence = "Wow " + playerName + "! You set a new Record!";
+            gifDisplayHighscore();
+
             localStorage.setItem('highscorename', playerName);
             localStorage.setItem('highscorenumber', score);
         }
@@ -289,18 +297,25 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         }
         else if (highscorenumber == score) {
             finalSentence = "Nice work " + playerName + ". You scored same as the current Record!";
+            gifDisplayHighscore();
+
         }
     }
     else {
         highscorenumber = 0;
         if (score == 100) {
             finalSentence = "Wow " + playerName + "! You scored 100% and set a new Record as the first player!";
+            gifDisplayHighscore();
+
         }
         else if (score == 0) {
             finalSentence = "You didn't even try " + playerName + " ... and set a record of '0'... Booo";
+            gifDisplayLowscore();//lowscore
         }
         else {
             finalSentence = playerName + ", you actually set a new Record as the first player!";
+            gifDisplayHighscore();
+
 
         }
         localStorage.setItem('highscorename', playerName);
@@ -319,7 +334,8 @@ const finalDisplayCalculate = (score, numberOfqs) => {
 
 const displayResult = (score, highscorename, highscorenumber, finalSentence) => {
 
-    
+    //gifDisplayHighscore();//display gif for beating high score
+   
     const resultCard = document.createElement('div');
     resultCard.classList.add("card-body");
     resultCard.id = "card-inner";
@@ -387,3 +403,4 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
 
 //===========================================================
+
