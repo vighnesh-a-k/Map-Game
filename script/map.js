@@ -29,17 +29,17 @@ let answers = new Map([
     [8, "Africa"],
     [9, "South America"],
     [10, "South America"]
-])  
+])
 
 //defining the set for question numbers
-let  questionNoList=new Set();
+let questionNoList = new Set();
 let currentQuestionNo;
 
 //varibale to store the id returned by the setinterval function
 let timerId;
 
- //fetching data from session Storage
-const playerName=sessionStorage.getItem('playerName');
+//fetching data from session Storage
+const playerName = sessionStorage.getItem('playerName');
 const noOfQuestion = sessionStorage.getItem('noOfQuestion');
 
 //variable to store score
@@ -47,10 +47,10 @@ let score = 0;
 
 //====================================================================
 
-window.onload=function(){
+window.onload = function () {
     //random question number generation
-    while(questionNoList.size<noOfQuestion){
-        let randomValue=Math.floor(Math.random()*10);
+    while (questionNoList.size < noOfQuestion) {
+        let randomValue = Math.floor(Math.random() * 10);
         questionNoList.add(randomValue);
     }
     console.log(questionNoList);
@@ -63,14 +63,14 @@ window.onload=function(){
 //====================================================================
 //Functions which provide questions and functionality to buttons
 
-function generateQuestion(){
-      //function which generates questions
+function generateQuestion() {
+    //function which generates questions
     disableButton();
     removeTimeoutMessage();
     clearInterval(timerId); //clear the existing timer
     stopTimer();; //stop the timer
     startTimer();;
-    if(questionNoList.length<=0){//if last question, go to result
+    if (questionNoList.length <= 0) {//if last question, go to result
         finalDisplayCalculate(score, noOfQuestion);;
         return;
     }
@@ -80,30 +80,29 @@ function generateQuestion(){
     displayQuestion();
 }
 
-function displayQuestion(){
+function displayQuestion() {
 
     let resultDisplayElement = document.getElementById("result-text");
     let questionDisplayElement = document.getElementById("question-text");
 
-
-        resultDisplayElement.style.display="none"
-        questionDisplayElement.innerText=questions.get(currentQuestionNo+1);
+    resultDisplayElement.style.display = "none"
+    questionDisplayElement.innerText = questions.get(currentQuestionNo + 1);
 
 }
 
-function displayCurrentResult(clickId){
+function displayCurrentResult(clickId) {
     //display the result of current question
     let resultDisplayElement = document.getElementById("result-text");
-   
-    let answer=answers.get(currentQuestionNo+1);
 
-    if(answer==clickId){
+    let answer = answers.get(currentQuestionNo + 1);
+
+    if (answer == clickId) {
         resultDisplayElement.innerText = "Correct!";
         resultDisplayElement.style = "color:green";
 
         updateScore();
     }
-    else{
+    else {
         resultDisplayElement.innerText = "Wrong!";
         resultDisplayElement.style = "color:red";
     }
@@ -111,11 +110,11 @@ function displayCurrentResult(clickId){
 }
 
 //function to update score based on questions
-function updateScore(){
+function updateScore() {
     score++;
 }
 
-function clickReciever(clickedElementId){
+function clickReciever(clickedElementId) {
     //recieve and process the click on the map
     enableButton();//next button enabled
     clearInterval(timerId);//stop the timer
@@ -124,19 +123,19 @@ function clickReciever(clickedElementId){
     displayCurrentResult(clickedElementId);
 }
 
-function enableAnswering(){
+function enableAnswering() {
     //eneble the clicking  the map
-    areaContainer=document.querySelectorAll('area');
-    areaContainer.forEach((question) => {
-        question.onclick = function() {
+    areaContainer = document.querySelectorAll('area');
+    areaContainer.forEach((area) => {
+        area.onclick = function () {
             clickReciever(this.id);
         };
     });
 }
 
-function disableAnswering(){
+function disableAnswering() {
     //disable clicking the map
-    areaContainer=document.querySelectorAll('area');
+    areaContainer = document.querySelectorAll('area');
     areaContainer.forEach((question) => {
         question.onclick = null;
     });
@@ -145,14 +144,14 @@ function disableAnswering(){
 function displayTimeoutMessage() {
     document.getElementById('timeout-message').style.display = 'block';
     disableAnswering();
-  }
+}
 
-function removeTimeoutMessage(){
+function removeTimeoutMessage() {
 
     document.getElementById('timeout-message').style.display = 'none';
-}  
+}
 
-function enableButton(){
+function enableButton() {
 
     let button = document.getElementById("next-button");
     button.disabled = false;
@@ -163,15 +162,15 @@ function enableButton(){
     if (questionNoList.length <= 0) {//if last question, change the button text to submit
         button.innerHTML = "  Submit  ";
     }
-    
-    button.onclick=generateQuestion
+
+    button.onclick = generateQuestion
 }
 
-function disableButton(){
+function disableButton() {
 
     let button = document.getElementById("next-button");
     button.disabled = true;
-    
+
     button.classList.remove("btn-primary");
     button.classList.add("btn-danger");
     button.style.opacity = 0.75;
@@ -183,24 +182,25 @@ function disableButton(){
 function startTimer() {
     let timer = 10;
     let displayElement = document.getElementById("timer");
+
     document.getElementById("timer-display").style.display = "block";
-  
+
     // Use setInterval to update the timer display every second
     timerId = setInterval(function () {
         displayElement.textContent = timer;
-    
+
         if (--timer < 0) {
             displayTimeoutMessage();
             enableButton();
             stopTimer();
             clearInterval(timerId);
-        
+
         }
     }, 1000);
     // console.log("console id:",timerId)
-  }
-  
-function stopTimer(){
+}
+
+function stopTimer() {
     document.getElementById("timer-display").style.display = "none";
 
 }
@@ -210,22 +210,20 @@ function stopTimer(){
 
 //display gif for highscore
 
-function gifDisplayHighscore()
-{
-    setTimeout(function(){
-        document.getElementById("highscore-gif").style='visibility:hidden';
-    },5000);
-    document.getElementById("highscore-gif").style='visibility:visible';
+function gifDisplayHighscore() {
+    setTimeout(function () {
+        document.getElementById("highscore-gif").style = 'visibility:hidden';
+    }, 5000);
+    document.getElementById("highscore-gif").style = 'visibility:visible';
 }
 
 //diplay gif for low score
 
-function gifDisplayLowscore()
-{
-    setTimeout(function(){
-        document.getElementById("lowscore-gif").style='visibility:hidden';
-    },5000);
-    document.getElementById("lowscore-gif").style='visibility:visible';
+function gifDisplayLowscore() {
+    setTimeout(function () {
+        document.getElementById("lowscore-gif").style = 'visibility:hidden';
+    }, 5000);
+    document.getElementById("lowscore-gif").style = 'visibility:visible';
 }
 
 //==============================================================================
@@ -239,7 +237,7 @@ function gifDisplayLowscore()
 //not used for functioning of the program
 
 function storehighscore() {
-    
+
     let highscorename = 'name';
     let highscorenumber = 50;
     localStorage.setItem('highscorename', highscorename);
@@ -252,9 +250,9 @@ function storehighscore() {
 
 //function to select what to display on the final screen
 const finalDisplayCalculate = (score, numberOfqs) => {
-  
 
-    let bgaudio=document.getElementById('bg-audio');
+
+    let bgaudio = document.getElementById('bg-audio');
     bgaudio.pause();
     score = (Math.round(((parseInt(score) / parseInt(numberOfqs)) * 100) * 100) / 100).toFixed(2);
     let finalSentence;
@@ -266,7 +264,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
         highscorenumber = parseInt(localStorage.getItem('highscorenumber'));
         highscorename = localStorage.getItem('highscorename');
 
-//console.count("hn :" + highscorenumber + " " + highscorename + " ys: " + score);
+        //console.count("hn :" + highscorenumber + " " + highscorename + " ys: " + score);
 
         if (score == 100) {
             if (score > highscorenumber) {
@@ -382,7 +380,7 @@ const finalDisplayCalculate = (score, numberOfqs) => {
 const displayResult = (score, highscorename, highscorenumber, finalSentence) => {
 
     //gifDisplayHighscore();//display gif for beating high score
-   
+
     const resultCard = document.createElement('div');
     resultCard.classList.add("card-body");
     resultCard.id = "card-inner";
@@ -395,7 +393,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
     const cuRecDiv = document.createElement('div');
     cuRecDiv.id = "cRecScore-div";
-    cuRecDiv.innerText = "Current Record : " + highscorenumber+"%";
+    cuRecDiv.innerText = "Current Record : " + highscorenumber + "%";
 
     const cuRecNameDiv = document.createElement('div');
     cuRecNameDiv.id = "cRecName-div";
@@ -412,7 +410,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
     const yourScore = document.createElement('div');
     yourScore.id = "yourScore-div";
-    yourScore.innerText = "Your Score : " + score+"%";
+    yourScore.innerText = "Your Score : " + score + "%";
 
     resultCard.appendChild(yourScore);
 
@@ -427,7 +425,7 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 
     const replayButton = document.createElement('button');
     replayButton.id = "replay-button";
-    replayButton.classList.add("btn", "btn-success", "btn-lg","m-5");
+    replayButton.classList.add("btn", "btn-success", "btn-lg", "m-5");
     replayButton.innerHTML = "Try again";
     replayButton.onclick = function () {
         window.location.href = "./index.html";
@@ -455,6 +453,6 @@ const displayResult = (score, highscorename, highscorenumber, finalSentence) => 
 //play audio
 
 async function playAudio(audio) {
-        audio.play();
+    audio.play();
 }
 
