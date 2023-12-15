@@ -2,8 +2,6 @@
 
 //Questions
 
-
-
 let questions = new Map([
     [1, "Which continent is India part of?"],
     [2, "Which is the largest continent in area?"],
@@ -16,7 +14,10 @@ let questions = new Map([
     [9, "Columbus found which continent?"],
     [10, "Where is Amazon River?"]
 ]);
+
+
 //Answers to the questions
+
 let answers = new Map([
     [1, "Asia"],
     [2, "Asia"],
@@ -36,6 +37,7 @@ let currentQuestionNo;
 
 //varibale to store the id returned by the setinterval function
 let timerId;
+
  //fetching data from session Storage
 const playerName=sessionStorage.getItem('playerName');
 const noOfQuestion = sessionStorage.getItem('noOfQuestion');
@@ -51,11 +53,11 @@ window.onload=function(){
         let randomValue=Math.floor(Math.random()*10);
         questionNoList.add(randomValue);
     }
-    console.log(questionNoList)
-    questionNoList=[...questionNoList]
+    console.log(questionNoList);
+    questionNoList = [...questionNoList];
     console.log(questionNoList)
     generateQuestion();
-    displayQuestion()
+    // displayQuestion(); ---- already called inside generateQuestion()
 }
 
 //====================================================================
@@ -63,51 +65,50 @@ window.onload=function(){
 
 function generateQuestion(){
       //function which generates questions
-    disableButton()
-    removeTimeoutMessage()
+    disableButton();
+    removeTimeoutMessage();
     clearInterval(timerId); //clear the existing timer
-    stopTimer() //stop the timer
-    startTimer()
-    if(questionNoList.length<=0){
+    stopTimer(); //stop the timer
+    startTimer();
+    if(questionNoList.length<=0){//if last question, go to result
         
-        finalDisplayCalculate(score,noOfQuestion)
+        finalDisplayCalculate(score, noOfQuestion);
         return;
     }
-    currentQuestionNo=questionNoList.pop()
-    console.log(currentQuestionNo)
-    console.log(getElementFromIndex(currentQuestionNo,questions))
-    enableAnswering()
-    displayQuestion()
+    currentQuestionNo = questionNoList.pop();
+    console.log(currentQuestionNo);
+    console.log(getElementFromIndex(currentQuestionNo, questions));
+    enableAnswering();
+    displayQuestion();
 }
 
 function displayQuestion(){
 
-        let resultDisplayElement=document.getElementById("result-text")
-        let questionDisplayElement=document.getElementById("question-text")
+    let resultDisplayElement = document.getElementById("result-text");
+    let questionDisplayElement = document.getElementById("question-text");
 
-
-        resultDisplayElement.style.display="none"
-        questionDisplayElement.innerText=getElementFromIndex(currentQuestionNo,questions)
+    resultDisplayElement.style.display = "none";
+    questionDisplayElement.innerText = getElementFromIndex(currentQuestionNo, questions);
 
 }
 
 function displayCurrentResult(clickId){
     //display the result of current question
-    let resultDisplayElement=document.getElementById("result-text")
+    let resultDisplayElement = document.getElementById("result-text");
    
-    let answer=getElementFromIndex(currentQuestionNo,answers)
+    let answer = getElementFromIndex(currentQuestionNo, answers);
 
     if(answer==clickId){
-        resultDisplayElement.innerText = "Correct!"
-        resultDisplayElement.style = "color:green"
+        resultDisplayElement.innerText = "Correct!";
+        resultDisplayElement.style = "color:green";
 
         updateScore();
     }
     else{
-        resultDisplayElement.innerText = "Wrong!"
-        resultDisplayElement.style="color:red"
+        resultDisplayElement.innerText = "Wrong!";
+        resultDisplayElement.style = "color:red";
     }
-    resultDisplayElement.style.display="block"
+    resultDisplayElement.style.display = "block";
 }
 
 //function to update score based on questions
@@ -117,11 +118,11 @@ function updateScore(){
 
 function clickReciever(clickedElementId){
     //recieve and process the click on the map
-    enableButton() //next button enabled
+    enableButton();//next button enabled
     clearInterval(timerId);//stop the timer
-    stopTimer()
-    disableAnswering()
-    displayCurrentResult(clickedElementId)
+    stopTimer();
+    disableAnswering();
+    displayCurrentResult(clickedElementId);
 }
 
 function enableAnswering(){
@@ -138,13 +139,13 @@ function disableAnswering(){
     //disable clicking the map
     areaContainer=document.querySelectorAll('area');
     areaContainer.forEach((question) => {
-        question.onclick =null
+        question.onclick = null;
     });
 }
 
 function displayTimeoutMessage() {
     document.getElementById('timeout-message').style.display = 'block';
-    disableAnswering()
+    disableAnswering();
   }
 
 function removeTimeoutMessage(){
@@ -158,10 +159,10 @@ function enableButton(){
     button.disabled = false;
     button.classList.remove("btn-danger");
     button.classList.add("btn-primary");
-    button.style.opacity = 1
+    button.style.opacity = 1;
 
-    if (questionNoList.length <= 0) {
-        button.innerHTML = "  Submit  "
+    if (questionNoList.length <= 0) {//if last question, change the button text to submit
+        button.innerHTML = "  Submit  ";
     }
     
     button.onclick=generateQuestion
@@ -174,8 +175,8 @@ function disableButton(){
     
     button.classList.remove("btn-primary");
     button.classList.add("btn-danger");
-    button.style.opacity=0.75
-    button.onclick=""
+    button.style.opacity = 0.75;
+    button.onclick = "";
 }
 
 //general utitlity function 
@@ -183,33 +184,33 @@ function disableButton(){
 function getElementFromIndex(index,map){
 
     let keys =Array.from(map.keys()); 
-    let indexKey=keys[index]
+    let indexKey = keys[index];
     
-    console.log(questions.get(indexKey))
+    console.log(questions.get(indexKey));
 
-    return map.get(indexKey)
+    return map.get(indexKey);
 }
 
 function startTimer() {
     let timer = 10;
-    let displayElement=document.getElementById("timer")
-    document.getElementById("timer-display").style.display="block"
+    let displayElement = document.getElementById("timer");
+    document.getElementById("timer-display").style.display = "block";
   
     // Use setInterval to update the timer display every second
     timerId = setInterval(function () {
         displayElement.textContent = timer;
     
         if (--timer < 0) {
-            displayTimeoutMessage()
-            enableButton()
-            stopTimer()
+            displayTimeoutMessage();
+            enableButton();
+            stopTimer();
             clearInterval(timerId);
         
         }
     }, 1000);
   }
 function stopTimer(){
-    document.getElementById("timer-display").style.display="none"
+    document.getElementById("timer-display").style.display = "none";
 
 }
 
