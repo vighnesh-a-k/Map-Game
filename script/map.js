@@ -68,16 +68,14 @@ function generateQuestion(){
     disableButton();
     removeTimeoutMessage();
     clearInterval(timerId); //clear the existing timer
-    stopTimer(); //stop the timer
-    startTimer();
+    stopTimer();; //stop the timer
+    startTimer();;
     if(questionNoList.length<=0){//if last question, go to result
-        
-        finalDisplayCalculate(score, noOfQuestion);
+        finalDisplayCalculate(score, noOfQuestion);;
         return;
     }
     currentQuestionNo = questionNoList.pop();
-    console.log(currentQuestionNo);
-    console.log(getElementFromIndex(currentQuestionNo, questions));
+
     enableAnswering();
     displayQuestion();
 }
@@ -87,8 +85,9 @@ function displayQuestion(){
     let resultDisplayElement = document.getElementById("result-text");
     let questionDisplayElement = document.getElementById("question-text");
 
-    resultDisplayElement.style.display = "none";
-    questionDisplayElement.innerText = getElementFromIndex(currentQuestionNo, questions);
+
+        resultDisplayElement.style.display="none"
+        questionDisplayElement.innerText=questions.get(currentQuestionNo+1);
 
 }
 
@@ -96,7 +95,7 @@ function displayCurrentResult(clickId){
     //display the result of current question
     let resultDisplayElement = document.getElementById("result-text");
    
-    let answer = getElementFromIndex(currentQuestionNo, answers);
+    let answer=answers.get(currentQuestionNo+1);
 
     if(answer==clickId){
         resultDisplayElement.innerText = "Correct!";
@@ -180,16 +179,6 @@ function disableButton(){
 }
 
 //general utitlity function 
-//function to get elements from map using index
-function getElementFromIndex(index,map){
-
-    let keys =Array.from(map.keys()); 
-    let indexKey = keys[index];
-    
-    console.log(questions.get(indexKey));
-
-    return map.get(indexKey);
-}
 
 function startTimer() {
     let timer = 10;
@@ -208,7 +197,9 @@ function startTimer() {
         
         }
     }, 1000);
+    // console.log("console id:",timerId)
   }
+  
 function stopTimer(){
     document.getElementById("timer-display").style.display = "none";
 
